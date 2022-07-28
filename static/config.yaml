@@ -1,0 +1,47 @@
+server:
+  port: 443
+  pemPath: ./static/https/stl.pem
+  keyPath: ./static/https/stl.key
+  key: D0F051AF5BB14A00
+database:
+  #host 数据库主机地址
+  host: 162.14.115.114
+  #port 数据库开启端口
+  port: 3306
+  #username 数据库账号
+  username: root
+  #password 数据库密码
+  password: 8023Qiao
+  #dbname 数据库名
+  dbname: ReservationAccount
+  #charset 字符集
+  charset: utf8
+redis:
+  #db redis 服务器选择
+  db: 0
+  #addr redis 地址
+  addr: 162.14.115.114:6379
+  #password redis 密码
+  password: 8023Qiao
+wechat:
+  # appID 微信公众号或者小程序的appID
+  appID: wx6908e29aff855329
+  # wxSecret 微信appSecret
+  wxSecret: 34c9891dc55c73a3da83e115fe27539e
+  # mchID 微信支付商户号
+  mchID: 1611039503
+  # mchCertificateSerialNumber
+  mchCertificateSerialNumber: 3C12B6F833E556F4CE182EA928017ABC76962A06
+  # mchKey 微信支付商户密钥
+  mchAPIv3Key: dbkhfergyui3hdibgdv3cxe3napaadmw
+  # notify_url 支付回调函数url
+  notify_url: https://qiaohuhu.xyz:9001/api/v1/reservation/payCallback/v1
+  # keyPath 证书位置
+  keyPath: ./static/wechat/apiclient_key.pem
+sms:
+  secretID: AKIDBHAwXIqBH8kBRYYbVCeqpZ8cL1VpBOOH
+  secretKey: kR8eyEG4fEqW5QWP4VhdKrEUcbS9h6MS
+  appID: 1305072851
+  signature: 宜宾万重山网络
+  templateID: 1143189
+
