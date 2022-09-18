@@ -60,12 +60,12 @@ func PrePay(description string, orderID string, timeExpire time.Time, openID str
 			Appid:       core.String(viper.GetString("wechat.appID")),      // 由微信生成的应用ID，全局唯一。请求基础下单接口时请注意APPID的应用属性，例如公众号场景下，需使用应用属性为公众号的服务号APPID
 			Mchid:       core.String(viper.GetString("wechat.mchID")),      // 直连商户的商户号，由微信支付生成并下发。
 			Description: core.String(description),                          // 商品描述
-			OutTradeNo:  core.String(orderID),                              // 平台内部订单id
+			OutTradeNo:  core.String("order" + orderID),                    // 平台内部订单id
 			TimeExpire:  core.Time(timeExpire),                             // 订单失效时间
 			Attach:      nil,                                               // 附加数据，在查询API和支付通知中原样返回，可作为自定义参数使用，实际情况下只有支付完成状态才会返回该字段。
 			NotifyUrl:   core.String(viper.GetString("wechat.notify_url")), // 异步接收微信支付结果通知的回调地址，通知url必须为外网可访问的url，不能携带参数。 公网域名必须为https，如果是走专线接入，使用专线NAT IP或者私有回调域名可使用http
 			Amount: &jsapi.Amount{
-				Total:    core.Int64(1),
+				Total:    core.Int64(100 * 20),
 				Currency: core.String("CNY"),
 			},
 			Payer: &jsapi.Payer{

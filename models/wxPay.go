@@ -14,3 +14,6 @@ type WxPayRecord struct {
 	Nonce          string    // 加密使用的随机串
 	Summary        string    // 回调摘要
 }
+
+type PayRecord struct {
+}

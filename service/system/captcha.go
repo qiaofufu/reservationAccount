@@ -5,6 +5,7 @@ import (
 	"ReservationAccount/utils"
 	"context"
 	"errors"
+	"log"
 	"time"
 )
 
@@ -19,6 +20,10 @@ func (receiver CaptchaService) CaptchaPhone(phone string) error {
 	if err != nil {
 		return errors.New("发送手机验证码失败！ " + err.Error())
 	}
-	global.Redis.Set(ctx, "phone:"+phone, code, time.Second*300)
+	log.Println("1 key:" + "phone:" + phone)
+	statusCmd := global.Redis.Set(ctx, "phone:"+phone, code, time.Second*300)
+	if statusCmd.Err() != nil {
+		return statusCmd.Err()
+	}
 	return nil
 }

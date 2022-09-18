@@ -38,7 +38,7 @@ func (receiver ReservationService) SearchPhone(suffix string) (phone []models.Ph
 		err = errors.New("尾数超出4位限制")
 		return
 	}
-	phones := prefix + "%" + suffix + "%"
+	phones := "%" + suffix + "%"
 	log.Println(phones)
 	err = global.DB.Where("phone LIKE ?", phones).Find(&phone).Error
 	return

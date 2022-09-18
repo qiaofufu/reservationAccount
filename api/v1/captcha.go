@@ -4,7 +4,9 @@ import (
 	"ReservationAccount/models/request"
 	"ReservationAccount/models/response"
 	"ReservationAccount/utils"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"strings"
 )
 
 type CaptchaAPI struct{}
@@ -24,6 +26,9 @@ func (receiver CaptchaAPI) CaptchaPhone(ctx *gin.Context) {
 		return
 	}
 	phoneCaptcha.Number = utils.DecryptByAes(phoneCaptcha.Number)
+	if !strings.HasPrefix(phoneCaptcha.Number, "+86") {
+		phoneCaptcha.Number = fmt.Sprintf("+86%v", phoneCaptcha.Number)
+	}
 	err := CaptchaService.CaptchaPhone(phoneCaptcha.Number)
 	if err != nil {
 		response.FailWithMessage("获取失败!"+err.Error(), ctx)

@@ -12,8 +12,8 @@ require (
 	github.com/swaggo/files v0.0.0-20220610200504-28940afbdbfe
 	github.com/swaggo/gin-swagger v1.5.0
 	github.com/swaggo/swag v1.8.3
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.434
-	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/sms v1.0.434
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.493
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/sms v1.0.493
 	github.com/unrolled/secure v1.10.0
 	github.com/wechatpay-apiv3/wechatpay-go v0.2.14
 	gorm.io/driver/mysql v1.3.4

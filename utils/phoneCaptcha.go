@@ -9,6 +9,7 @@ import (
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/profile"
 	sms "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/sms/v20210111"
+	"log"
 )
 
 var credential *common.Credential
@@ -45,10 +46,11 @@ func SendSMS(phone string, code string) error {
 // 验证SMS
 func VerifySMS(phone string, code string) bool {
 	ctx := context.Background()
+	log.Println("2 key:" + "phone:" + phone)
 	result := global.Redis.Get(ctx, "phone:"+phone)
 
 	if result.Val() == code {
-		global.Redis.Del(ctx, "phone_"+phone)
+		global.Redis.Del(ctx, "phone:"+phone)
 		return true
 	}
 	return false

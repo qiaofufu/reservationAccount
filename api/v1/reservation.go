@@ -5,10 +5,12 @@ import (
 	"ReservationAccount/models/response"
 	"ReservationAccount/utils"
 	"context"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/wechatpay-apiv3/wechatpay-go/services/payments"
 	"log"
 	"net/http"
+	"strings"
 )
 
 type ReservationAPI struct {
@@ -36,10 +38,12 @@ func (receiver ReservationAPI) ReservationPhone(ctx *gin.Context) {
 	}
 	// 信息解密
 	data := utils.DecryptByAes(reqDTO.IdentifyCard)
-	log.Println(data)
 	reqDTO.IdentifyCard = data
+
 	data = utils.DecryptByAes(reqDTO.ContactPhone)
-	log.Println(data)
+	if !strings.HasPrefix(data, "+86") {
+		data = "+86" + data
+	}
 	reqDTO.ContactPhone = data
 	// 进行预约操作
 	prepay, err := ReservationService.Reservation(reqDTO.RealName, reqDTO.IdentifyCard, reqDTO.ContactPhone, reqDTO.School, reqDTO.ReservationPhoneID, reqDTO.SalesmanID, reqDTO.OpenID)
@@ -76,7 +80,11 @@ func (receiver ReservationAPI) GetReservationRecord(ctx *gin.Context) {
 
 	data := utils.DecryptByAes(reqDTO.Phone)
 	log.Println(data)
-	reqDTO.Phone = string(data)
+	reqDTO.Phone = data
+
+	if !strings.HasPrefix(reqDTO.Phone, "+86") {
+		reqDTO.Phone = fmt.Sprintf("+86%v", reqDTO.Phone)
+	}
 
 	if utils.VerifySMS(reqDTO.Phone, reqDTO.VerifyCode) == false {
 		response.FailWithMessage("短信验证失败", ctx)

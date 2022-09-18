@@ -40,8 +40,6 @@ func start() {
 	port := ":" + viper.GetString("server.port")
 	pemPath := viper.GetString("server.pemPath")
 	keyPath := viper.GetString("server.keyPath")
-	fmt.Println(pemPath)
-	fmt.Println(keyPath)
 
 	// swagger page
 	engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
